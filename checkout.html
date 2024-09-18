@@ -215,7 +215,7 @@ form.addEventListener('submit', e => {
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => {
             if (response.ok) {
-                // Redirect to payment.html if form submission is successful
+                
                 window.location.href = 'Payment.html';
             } else {
                 alert('There was an issue with your submission. Please try again.');
@@ -243,7 +243,7 @@ form.addEventListener('submit', e => {
                 </tr>
             </thead>
             <tbody id="order-summary-body">
-                <!-- Order summary rows will be added here dynamically -->
+                
             </tbody>
         </table>
     </div>
@@ -302,19 +302,18 @@ function updateCartPage() {
     const cartSubtotalContainer = document.getElementById('cart-subtotal');
     const cartTotalContainer = document.getElementById('cart-total');
     const orderSummaryBody = document.getElementById('order-summary-body');
-    const cartDataInput = document.getElementById('cart-data'); // Új sor
+    const cartDataInput = document.getElementById('cart-data');
 
     let subtotal = 0;
-    let shipping = 5.00; // Fix szállítási költség
+    let shipping = 5.00; 
     cartItemsContainer.innerHTML = '';
     orderSummaryBody.innerHTML = '';
 
-    let cartData = []; // Array a kosár adatok tárolására
-
+    let cartData = []; 
     cart.forEach((product, index) => {
         subtotal += product.price * product.quantity;
 
-        // Kosár elemek listájához hozzáadása
+       
         const li = document.createElement('li');
         li.classList.add('cart-item');
         li.innerHTML = `
@@ -328,7 +327,7 @@ function updateCartPage() {
         `;
         cartItemsContainer.appendChild(li);
 
-        // Megrendelés összesítő táblázathoz hozzáadása
+        
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${product.name} (${product.pattern}, Size: ${product.size})</td>
@@ -338,7 +337,7 @@ function updateCartPage() {
         `;
         orderSummaryBody.appendChild(row);
 
-        // Termék adatainak hozzáadása a cartData tömbhöz
+       
         cartData.push(product);
     });
 
@@ -347,29 +346,19 @@ function updateCartPage() {
     cartSubtotalContainer.innerText = subtotal.toFixed(2);
     cartTotalContainer.innerText = total.toFixed(2);
 
-    // Rejtett input mező frissítése a kosár adatokkal
+  
     cartDataInput.value = JSON.stringify(cartData);
 }
 
     </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    // Ellenőrizzük a kosarat a LocalStorage-ból
+
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     
-    // Ha nincs kosár tartalom, adjunk egy teszt terméket, hogy lássuk, működik-e
-    if (cart.length === 0) {
-        cart.push({
-            name: "Test Product",
-            price: 10,
-            quantity: 1,
-            size: "M",
-            pattern: "Striped",
-            image: "https://via.placeholder.com/100"
-        });
-    }
 
-    // Frissítjük a kosár oldalt
+
+   
     updateCartPage();
 });
 
